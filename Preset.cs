@@ -11,45 +11,7 @@ using static System.Console;
 
 namespace OutlookSort
 {
-    //public class Preset
-    //{
-    //    public string FolderName { get; set; }
-    //    private List<Filter> filters;
-    //    public List<Filter> PresetFilters
-    //    {
-    //        get => filters;
-    //        set
-    //        {
-    //            if(value.Count == 0)
-    //            {
-    //                throw new System.ArgumentException("Preset must have at least one filter");
-    //            }
-    //            else
-    //            {
-    //                filters = value;
-    //            }
-    //        }
-    //    }
-    //    private string FileName;
-    //    public Preset(string fileName)
-    //    {
-    //        this.FileName = fileName;
-    //    }
-    //    public Preset(string FolderName, List<Filter> filterz)
-    //    {
-    //        this.FolderName = FolderName;
-    //        this.PresetFilters = filterz;
-    //    }
-    //    public void ReadJson()
-    //    {
-    //        string json = File.ReadAllText(this.FileName);
-            
-    //    }
-
-
-    //}
-
-    class Filter
+    public class Filter
     {
         public List<string> SubjectLines { get; set; }
         public List<string> EmailAddresses { get; set; }
@@ -137,6 +99,35 @@ namespace OutlookSort
                 WriteLine("*".PadRight(50, '*'));
             });
         }
+    }
+    public class Preset
+    {
+        public string FileName { get; set; }
+        
+
+        // Constructor when we are opening a preset
+        public Preset(string filePath)
+        {
+            this.FileName = Path.GetFileName(filePath);
+        }
+        public void OpenPresetJSON(string filePath)
+        {
+            if(!File.Exists(filePath))
+            {
+                WriteLine($"[!] File does not exist at {filePath} [!]");
+                return;
+            }
+            try
+            {
+                List<Filter> openFilters;
+                using (StreamReader stream = File.OpenText(filePath))
+                {
+                    List<Filter> openFilters = JsonConvert.DeserializeObject<List<Filter>>(stream);
+                }
+                
+            }
+        }
+        
 
 
     }
