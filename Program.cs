@@ -32,6 +32,9 @@ namespace OutlookSort
             //WriteLine("\n\napply method done, emails found below \n"); ReadLine();
             //Test.DisplayEmailsMoved();
 
+            // Main routine prototype
+            var app = new App();
+            app.MainMenu();
             
 
         }
