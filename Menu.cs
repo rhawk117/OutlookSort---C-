@@ -8,7 +8,7 @@ using static System.Console;
 
 namespace OutlookSort
 {
-    class Menu
+    public class Menu
     {
         public string[] Options { get; set; }
         public string Prompt { get; set; }
@@ -79,6 +79,19 @@ namespace OutlookSort
             while (keyPressed != ConsoleKey.Enter);
             return selectedIndex;
         }   
+    }
+    public class MainMenu
+    {
+
+        private string titleText = @"   ___  _   _ _____ _     ___   ___  _  __  ____   _    _     
+                                      / _ \| | | |_   _| |   / _ \ / _ \| |/ / |  _ \ / \  | |    
+                                     | | | | | | | | | | |  | | | | | | | ' /  | |_) / _ \ | |    
+                                     | |_| | |_| | | | | |__| |_| | |_| | . \  |  __/ ___ \| |___ 
+                                      \___/ \___/  |_| |_____\___/ \___/|_|\_\ |_| /_/   \_\_____|";
+
+
+
+        
     }
     
 }
