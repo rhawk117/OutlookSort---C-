@@ -10,28 +10,20 @@ namespace OutlookSort
 {
     class Menu
     {
-        private string[] Options { get; set; }
-        private string Prompt { get; set; }
+        public string[] Options { get; set; }
+        public string Prompt { get; set; }
         private int selectedIndex;
-
         private int SelectedIndex
         {
-            get { return selectedIndex; }
+            get => selectedIndex;
             set
             {
-                // Wrap-around logic
                 if (value < 0)
-                {
                     selectedIndex = Options.Length - 1;
-                }
                 else if (value >= Options.Length)
-                {
                     selectedIndex = 0;
-                }
                 else
-                {
                     selectedIndex = value;
-                }
             }
         }
         public Menu(string[] options, string prompt)
@@ -40,7 +32,7 @@ namespace OutlookSort
             this.Prompt = prompt;
             this.SelectedIndex = 0;
         }
-        public void Show()
+        private void Show()
         {
             Clear();
             WriteLine("[" + Prompt + "]");
@@ -63,13 +55,14 @@ namespace OutlookSort
             }
             ResetColor();
         }
-
         public int Run()
         {
             ConsoleKey keyPressed;
             do
             {
-                Clear();  Show();
+                Clear();
+                Show();
+
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 keyPressed = keyInfo.Key;
                 switch(keyPressed)

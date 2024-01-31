@@ -39,13 +39,14 @@ namespace OutlookSort
         {
             appSetUp();
         }
-        private void RunMainMenu()
+        private void mainMenuHndler()
         {
-            Menu MainMenu = new Menu(
-                 new string[] { "Create a Preset", "Load a Preset", "Exit", "Help" }, 
-                "[ Select an Option Below to Continue]"
+            var menu = new Menu
+            (
+                options: new string[] { "Create Preset", "Open Preset", "Exit" }, 
+                prompt: "Main Menu"
             );
-            int selection = MainMenu.Run();
+            int selection = menu.Run();
         }
 
 
