@@ -9,6 +9,8 @@ namespace OutlookSort
     {
         // Regex from https://stackoverflow.com/questions/1365407/c-sharp-code-to-validate-email-address
         // Checks if an email is valid with a regex & checking then if the domain exists
+
+
         private const string emailRegexStr = @"
         ^                           # Start of string
         [a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+  # Username part

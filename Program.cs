@@ -34,8 +34,7 @@ namespace OutlookSort
 
             // Main routine prototype
             var app = new App();
-            app.MainMenu();
-            
+   
 
         }
     }

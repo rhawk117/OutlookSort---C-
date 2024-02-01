@@ -42,8 +42,6 @@ namespace OutlookSort
             }
 
         }
-
-        private List<string> _folderName;
         public List<string> FolderName { get; set; }
 
         public List<MailItem> FoundEmails { get; set; }

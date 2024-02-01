@@ -12,6 +12,7 @@ namespace OutlookSort
     {
         public string[] Options { get; set; }
         public string Prompt { get; set; }
+
         private int selectedIndex;
         private int SelectedIndex
         {
@@ -35,12 +36,12 @@ namespace OutlookSort
         private void Show()
         {
             Clear();
-            WriteLine("[" + Prompt + "]");
+            WriteLine("");
             for (int i = 0; i < Options.Length; i++)
             {
-                
-                string currentOption = Options[i], prefix = "";  
-                if(i == SelectedIndex)
+
+                string currentOption = Options[i], prefix = "";
+                if (i == SelectedIndex)
                 {
                     prefix = "> ";
                     ForegroundColor = ConsoleColor.Black;
@@ -51,7 +52,7 @@ namespace OutlookSort
                     ForegroundColor = ConsoleColor.White;
                     BackgroundColor = ConsoleColor.Black;
                 }
-                WriteLine($"{prefix} [ "+ currentOption + " ]");
+                WriteLine($"{prefix} [ " + currentOption + " ]");
             }
             ResetColor();
         }
@@ -65,7 +66,7 @@ namespace OutlookSort
 
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 keyPressed = keyInfo.Key;
-                switch(keyPressed)
+                switch (keyPressed)
                 {
                     case ConsoleKey.UpArrow:
                         selectedIndex--;
@@ -75,23 +76,85 @@ namespace OutlookSort
                         selectedIndex++;
                         break;
                 }
-            } 
+            }
             while (keyPressed != ConsoleKey.Enter);
             return selectedIndex;
-        }   
+        }
     }
-    public class MainMenu
+    public static class MainMenu
     {
+        private const string TitleText = @"
+        ===========================================================================================================
+                                                                                                                       
+         @@@@@@   @@@  @@@  @@@@@@@  @@@        @@@@@@    @@@@@@   @@@  @@@      @@@@@@    @@@@@@   @@@@@@@   @@@@@@@  
+        @@@@@@@@  @@@  @@@  @@@@@@@  @@@       @@@@@@@@  @@@@@@@@  @@@  @@@     @@@@@@@   @@@@@@@@  @@@@@@@@  @@@@@@@  
+        @@!  @@@  @@!  @@@    @@!    @@!       @@!  @@@  @@!  @@@  @@!  !@@     !@@       @@!  @@@  @@!  @@@    @@!    
+        !@!  @!@  !@!  @!@    !@!    !@!       !@!  @!@  !@!  @!@  !@!  @!!     !@!       !@!  @!@  !@!  @!@    !@!    
+        @!@  !@!  @!@  !@!    @!!    @!!       @!@  !@!  @!@  !@!  @!@@!@!      !!@@!!    @!@  !@!  @!@!!@!     @!!    
+        !@!  !!!  !@!  !!!    !!!    !!!       !@!  !!!  !@!  !!!  !!@!!!        !!@!!!   !@!  !!!  !!@!@!      !!!    
+        !!:  !!!  !!:  !!!    !!:    !!:       !!:  !!!  !!:  !!!  !!: :!!           !:!  !!:  !!!  !!: :!!     !!:    
+        :!:  !:!  :!:  !:!    :!:     :!:      :!:  !:!  :!:  !:!  :!:  !:!         !:!   :!:  !:!  :!:  !:!    :!:    
+        ::::: ::  ::::: ::     ::     :: ::::  ::::: ::  ::::: ::   ::  :::     :::: ::   ::::: ::  ::   :::     ::    
+         : :  :    : :  :      :     : :: : :   : :  :    : :  :    :   :::     :: : :     : :  :    :   : :     : 
 
-        private string titleText = @"   ___  _   _ _____ _     ___   ___  _  __  ____   _    _     
-                                      / _ \| | | |_   _| |   / _ \ / _ \| |/ / |  _ \ / \  | |    
-                                     | | | | | | | | | | |  | | | | | | | ' /  | |_) / _ \ | |    
-                                     | |_| | |_| | | | | |__| |_| | |_| | . \  |  __/ ___ \| |___ 
-                                      \___/ \___/  |_| |_____\___/ \___/|_|\_\ |_| /_/   \_\_____|";
+                                            *** created by rhawk117 *** 
+                                        
+        ===========================================================================================================
+            
+        ";
 
+        public static void Run(bool havePresets)
+        {
+            Display(havePresets);
+        }
 
+        private static void Display(bool hasPresets)
+        {
+            string[] menuOptions = hasPresets
+                ? new string[] { "Create Preset", "Help", "Exit" }
+                : new string[] { "Create Preset", "Open Preset", "Help", "Exit" };
+
+            var menu = new Menu
+            (
+                options: menuOptions,
+                prompt: (TitleText) + 
+                        "Welcome To Outlook Pal, Select a Menu Option To Continue"
+            );
+
+            int selection = menu.Run();
+            mainMenuHndler(menuOptions[selection]);
+        }
+        private static void mainMenuHndler(string option)
+        {
+            switch (option)
+            {
+                case "Create Preset":
+                    WriteLine("[i] Creating a new preset...");
+                    break;
+
+                case "Open Preset":
+                    WriteLine("[i] Opening a preset...");
+                    break;
+
+                case "Help":
+                    WriteLine("[i] Displaying help...");
+                    break;
+
+                case "Exit":
+                    WriteLine("[i] Exiting the program... [i]");
+                    Environment.Exit(0);
+                    break;
+
+                default:
+                    WriteLine("[!] Invalid selection, please try again");
+                    break;
+            }
+        }
 
         
     }
-    
+
 }
+    
+    
+
